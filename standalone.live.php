@@ -28,7 +28,7 @@ try {
 
 
 // Load current application based on update channel.
-$csAssets = json_decode(file_get_contents("https://assets.computestacks.net/ui/versions.json"), true)[$csVersion];
+$csAssets = json_decode(file_get_contents("https://cdn.cmptstks.com/frontend/versions.json"), true)[$csVersion];
 
 $scripts = '<script src="' . $csAssets['js']['vendor']['src'] . '" integrity="' . $csAssets['js']['vendor']['check'] . '" crossorigin="anonymous"></script><script src="' . $csAssets['js']['app']['src'] . '" integrity="' . $csAssets['js']['app']['check'] . '" crossorigin="anonymous"></script>';
 
