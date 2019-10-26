@@ -1,0 +1,17 @@
+; unstable, testing, stable
+version = unstable
+
+; ComputeStacks endpoint, including scheme (https)
+endpoint = https://demo.computestacks.net
+
+; OAuth Application ID (Must register with ComputeStacks and correctly set redirect url)
+; Should include all scopes except admin_read, admin_write, register.
+appID = OAuth Application ID
+
+; OAuth Application ID to create users. (only when autoLogin is true)
+; Generally you want this application to only allow the public and register scopes.
+setupAppID = OAuth Application ID
+setupAppSecret = OAuth Application Secret
+
+; When true, load api key/secret from local cpanel account and auto-login. If none exists, automatically create a new user.
+autoLogin = true
