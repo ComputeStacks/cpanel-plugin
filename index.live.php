@@ -7,8 +7,6 @@ try {
   echo 'Caught exception: ',  $e->getMessage(), "\n";
   die("Failed.");
 }
-//style="position: absolute; height: 100%; border: none"
-//style="height: 100%; width: 100%;"
 ?>
 <?php echo $cpanel->header(''); ?>
 <style>

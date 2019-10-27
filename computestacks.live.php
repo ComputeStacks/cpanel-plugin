@@ -67,6 +67,7 @@ class CSApi
 		if ($response->getStatusCode() == 201) {
 			$this->apikey = $result->user->api->username;
 			$this->apisecret = $result->user->api->password;
+			$this->saveUserConfig($result->user->api->username, $result->user->api->password);
 			return true;
 		} else {
 			return false;
@@ -98,11 +99,13 @@ class CSApi
 
 			$client = new Client();
 			$full_path = $this->endpoint . '/api/oauth/token';
+			$basicAuth = trim($this->csAppID) . ':' . trim($this->csAppSecret);
+			$basicAuthEncoded = strtr( base64_encode( $basicAuth ), '+/', '-_');
 			$data = [
 				'headers' => [
 					'Accept' => 'application/json; api_version=' . self::$api_version,
 					'Content-Type' => 'application/json',
-					'Authorization' => 'Basic ' . base64_encode($this->csAppID . ':' . $this->csAppSecret)
+					'Authorization' => 'Basic ' . $basicAuthEncoded
 				],
 				'json' => [
 					'scope' => 'public register',
@@ -118,7 +121,7 @@ class CSApi
 				return '';
 			}
 		} catch (Exception $e) {
-			echo "Error generating ComputeStacks Auth Token: " . $e->getMessage();
+			echo "Error generating ComputeStacks Auth Token: " . $e->getMessage() . "<br>";
 			die("fatal error");
 		}
 	}
@@ -134,17 +137,22 @@ class CSApi
 
 	private function loadUserConfig()
 	{
-		$getCpanelConfig = $this->cpanel->uapi('NVData', 'get', ['names' => 'computestacks']);
-		$userConfig = json_decode($getCpanelConfig['cpanelresult']['result']['data'][0]['value']);
-		if ($userConfig == NULL) {
+		try {
+			$getCpanelConfig = $this->cpanel->uapi('NVData', 'get', ['names' => 'computestacks']);
+			$userConfig = json_decode($getCpanelConfig['cpanelresult']['result']['data'][0]['value']);
+			if ($userConfig == NULL) {
+				$this->saveUserConfig('', '');
+				$this->apikey = '';
+				$this->apisecret = '';
+			} else {
+				$this->apikey = $userConfig->api_key;
+				$this->apisecret = $userConfig->api_secret;
+			}
+		} catch (Exception $e) {
 			$this->saveUserConfig('', '');
 			$this->apikey = '';
 			$this->apisecret = '';
-		} else {
-			$this->apikey = $userConfig->api_key;
-			$this->apisecret = $userConfig->api_secret;
 		}
-
 	}
 
 	private function saveUserConfig($api_key, $api_secret)
