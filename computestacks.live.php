@@ -57,7 +57,7 @@ class CSApi
 				'fname' => $this->username,
 				'lname' => $this->username,
 				'email' => $this->email,
-				'lang' => $this->locale
+				'locale' => $this->locale
 			],
 			'provider_server' => $server_url,
 			'provider_username' => $this->username
