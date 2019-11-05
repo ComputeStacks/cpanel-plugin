@@ -11,3 +11,7 @@ The installation process is a 2 step procedure:
 4) Thats it! It will be visible in the Software section within cPanel.
 
 If you wish to uninstall ComputeStacks, you can do so by removing the plugin files and running: `/usr/local/cpanel/scripts/uninstall_plugin computestacks.tar.gz`
+
+## Building
+
+Compress with `tar --exclude='.DS_Store' -czvf computestacks.tar.gz computestacks/`.

@@ -1,1 +1,52 @@
-[{"order":"99","type":"link","icon":"computestacks.png","id":"computestacks","group_id":"software","uri":"computestacks/index.live.php","featuremanager":true,"name":"ComputeStacks"}]
+[
+  {
+    "name": "ComputeStacks",
+    "order": -10,
+    "type": "group",
+    "id": "computestacks"
+  },
+  {
+    "name": "Manage Projects",
+    "type": "link",
+    "icon": "computestacks_manage.png",
+    "id": "computestacks_manage",    
+    "group_id": "computestacks",
+    "featuremanager": true,
+    "description": "ComputeStacks Manage Projects",
+    "order": "-10",
+    "uri": "computestacks/index.live.php"
+  },
+  {
+    "name": "ElasticSearch",
+    "type": "link",
+    "icon": "computestacks_es.png",
+    "id": "computestacks_esearch",
+    "group_id": "computestacks",
+    "featuremanager": true,
+    "description": "ComputeStacks Add ElasticSearch",
+    "order": "40",
+    "uri": "computestacks/index.live.php?image=elasticsearch"
+  },
+  {
+    "name": "Redis",
+    "type": "link",
+    "icon": "computestacks_redis.png",
+    "id": "computestacks_redis",
+    "group_id": "computestacks",
+    "featuremanager": true,
+    "description": "ComputeStacks Add Redis",
+    "order": "50",
+    "uri": "computestacks/index.live.php?image=redis"
+  },
+  {
+    "name": "Premium Wordpress",
+    "type": "link",
+    "icon": "computestacks_wordpress.png",
+    "id": "computestacks_wordress",
+    "group_id": "computestacks",
+    "featuremanager": true,
+    "description": "ComputeStacks Add Premium Wordpress",
+    "order": "60",
+    "uri": "computestacks/index.live.php?image=wordpress"
+  }
+]

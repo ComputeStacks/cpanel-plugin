@@ -2,3 +2,4 @@
 .DS_Store
 sync.sh
 computestacks.ini
+.editorconfig

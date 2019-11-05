@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * This is a workspace for testing WebComponents
+ */
+
 require_once '/usr/local/cpanel/php/cpanel.php';
 require_once 'vendor/autoload.php';
 require_once 'computestacks.live.php';
@@ -46,16 +51,16 @@ $stylesheets = '<link rel="stylesheet" href="' . $csResource . 'vendor.css"><lin
 
 
 $metaConfig = '<meta name="compute-stacks/initializers/options/endpoint" content="' . $csConfig['endpoint'] . '" />
-		<meta name="compute-stacks/initializers/options/remoteDomain" content="' . $domainsEndpoint . '">
-		<meta name="compute-stacks/initializers/options/baseUri" content="' . $currentURL . '">
-		<meta name="compute-stacks/initializers/options/clientId" content="' . $csConfig['appID'] . '" />
-		<meta name="compute-stacks/initializers/options/redirectToken" content="' . $cpanelSecurityToken . '" />';
+	<meta name="compute-stacks/initializers/options/remoteDomain" content="' . $domainsEndpoint . '">
+	<meta name="compute-stacks/initializers/options/baseUri" content="' . $currentURL . '">
+	<meta name="compute-stacks/initializers/options/clientId" content="' . $csConfig['appID'] . '" />
+	<meta name="compute-stacks/initializers/options/redirectToken" content="' . $cpanelSecurityToken . '" />';
 
 /**
  * For AutoLogin, we will:
  *
- *    1) Attempt to load the user's apikey/secret from the local store (NVData) and inject that into meta tags for our app
- *    2) If those credentials do not exist, we will generate a new user account automatically.
+ *  1) Attempt to load the user's apikey/secret from the local store (NVData) and inject that into meta tags for our app
+ *  2) If those credentials do not exist, we will generate a new user account automatically.
  */
 if ($csAutoLogin) {
 	if ($csAutoLogin) {
@@ -76,16 +81,24 @@ if ($csAutoLogin) {
 	}
 }
 
-$csHeader = $metaConfig . $stylesheets;
+//$csHeader = $metaConfig . $stylesheets;
+
+$cpanelHeader = str_replace('</head>', $metaConfig . '</head>', $cpanel->header(''));
+echo $cpanelHeader;
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<header><?php echo $csHeader; ?></header>
-<body>
-<div id="computestacks-app"></div>
-<div id="ember-bootstrap-wormhole"></div>
-<div id="ember-basic-dropdown-wormhole"></div>
-<?php echo $scripts; ?>
-</body>
-<?php $cpanel->end(); ?>
-</html>
+<script type="text/javascript">
+const header = document.createElement('header');
+const shadowRoot = header.attachShadow({mode: 'open'});
+shadowRoot.innerHTML = '<h1>Test</h1>';
+</script>
+<div class="body-content">
+	<h4>Ember</h4>
+	<div id="computestacks-app"></div>
+	<div id="ember-bootstrap-wormhole"></div>
+	<div id="ember-basic-dropdown-wormhole"></div>
+</div>
+<?php //echo $scripts; ?>
+<?php
+	echo $cpanel->footer();
+	$cpanel->end();
+?>
