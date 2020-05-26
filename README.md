@@ -12,6 +12,6 @@ The installation process is a 2 step procedure:
 
 If you wish to uninstall ComputeStacks, you can do so by removing the plugin files and running: `/usr/local/cpanel/scripts/uninstall_plugin computestacks.tar.gz`
 
-## Building
+## Notes
 
-Compress with `tar --exclude='.DS_Store' -czvf computestacks.tar.gz computestacks/`.
+If you want to customize how the app is displayed in the cPanel interface (the name, icons, etc), you can uncompress the `computestacks.tar.gz` file and edit the `install.json`. The `install_plugin` command can be used on a directory, as well as, a compressed file, so no need to re-compress after you make your changes. 

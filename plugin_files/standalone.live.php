@@ -32,10 +32,10 @@ $domainsEndpoint = "domains.live.php";
 ////
 // Get current URL for OAuth redirect
 // You must register this when generating your Application ID.
-$serverRequestUri = str_replace("/standalone.live.php", "", $_SERVER[REQUEST_URI]);
+$serverRequestUri = str_replace("/standalone.live.php", "", $_SERVER['REQUEST_URI']);
 
 // Ensure we have the scheme and port.
-$currentURL = "https://" . $_SERVER[HTTP_HOST] . ":2083" . $serverRequestUri;
+$currentURL = "https://" . $_SERVER['HTTP_HOST'] . ":2083" . $serverRequestUri;
 
 // remove the security token from the URI. Will be added later.
 $currentURL = str_replace($_ENV['cp_security_token'], '', $currentURL);
@@ -66,7 +66,7 @@ if ($csAutoLogin) {
 			die("Failed to setup ComputeStacks.");
 		}
 
-		if ($cs->generateAuth($_SERVER[HTTP_HOST])) {
+		if ($cs->generateAuth($_SERVER['HTTP_HOST'])) {
 			$metaConfig = $metaConfig . $cs->authMetaTags();
 		} else {
 			echo "Failed to generate authentication credentials.";
