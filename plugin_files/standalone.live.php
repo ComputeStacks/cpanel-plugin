@@ -4,17 +4,17 @@ require_once 'vendor/autoload.php';
 require_once 'computestacks.live.php';
 
 try {
-	$cpanel = new CPANEL();
+  $cpanel = new CPANEL();
 } catch (Exception $e) {
-	echo 'Caught exception: ', $e->getMessage(), "\n";
-	die("Failed.");
+  echo 'Caught exception: ', $e->getMessage(), "\n";
+  die("Failed.");
 }
 
 try {
-	$csConfig = parse_ini_file("computestacks.ini");
+  $csConfig = parse_ini_file("computestacks.ini");
 } catch (Exception $e) {
-	echo "Failed to load configuration file: ", $e->getMessage(), "\n";
-	die("Fatal Error");
+  echo "Failed to load configuration file: ", $e->getMessage(), "\n";
+  die("Fatal Error");
 }
 
 // We need to include this in our oauth redirect
@@ -46,10 +46,10 @@ $stylesheets = '<link rel="stylesheet" href="' . $csResource . 'vendor.css"><lin
 
 
 $metaConfig = '<meta name="compute-stacks/initializers/options/endpoint" content="' . $csConfig['endpoint'] . '" />
-		<meta name="compute-stacks/initializers/options/remoteDomain" content="' . $domainsEndpoint . '">
-		<meta name="compute-stacks/initializers/options/baseUri" content="' . $currentURL . '">
-		<meta name="compute-stacks/initializers/options/clientId" content="' . $csConfig['appID'] . '" />
-		<meta name="compute-stacks/initializers/options/redirectToken" content="' . $cpanelSecurityToken . '" />';
+    <meta name="compute-stacks/initializers/options/remoteDomain" content="' . $domainsEndpoint . '">
+    <meta name="compute-stacks/initializers/options/baseUri" content="' . $currentURL . '">
+    <meta name="compute-stacks/initializers/options/clientId" content="' . $csConfig['appID'] . '" />
+    <meta name="compute-stacks/initializers/options/redirectToken" content="' . $cpanelSecurityToken . '" />';
 
 /**
  * For AutoLogin, we will:
@@ -58,22 +58,22 @@ $metaConfig = '<meta name="compute-stacks/initializers/options/endpoint" content
  *    2) If those credentials do not exist, we will generate a new user account automatically.
  */
 if ($csAutoLogin) {
-	if ($csAutoLogin) {
-		try {
-			$cs = new CSApi($cpanel, $csConfig);
-		} catch (Exception $e) {
-			echo 'ComputeStacks Fatal Exception: ', $e->getMessage(), "\n";
-			die("Failed to setup ComputeStacks.");
-		}
+  if ($csAutoLogin) {
+    try {
+      $cs = new CSApi($cpanel, $csConfig);
+    } catch (Exception $e) {
+      echo 'ComputeStacks Fatal Exception: ', $e->getMessage(), "\n";
+      die("Failed to setup ComputeStacks.");
+    }
 
-		if ($cs->generateAuth($_SERVER['HTTP_HOST'])) {
-			$metaConfig = $metaConfig . $cs->authMetaTags();
-		} else {
-			echo "Failed to generate authentication credentials.";
-			die("Fatal error");
-		}
+    if ($cs->generateAuth($_SERVER['HTTP_HOST'])) {
+      $metaConfig = $metaConfig . $cs->authMetaTags();
+    } else {
+      echo "Failed to generate authentication credentials.";
+      die("Fatal error");
+    }
 
-	}
+  }
 }
 
 $csHeader = $metaConfig . $stylesheets;

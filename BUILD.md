@@ -11,4 +11,3 @@
     4. `BUILD.md`
     5. `computestacks` directory (after compressing in step 4)
 5. Zip the entire outer directory
-
