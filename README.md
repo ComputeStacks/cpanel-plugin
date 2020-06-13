@@ -14,4 +14,4 @@ If you wish to uninstall ComputeStacks, you can do so by removing the plugin fil
 
 ## Notes
 
-If you want to customize how the app is displayed in the cPanel interface (the name, icons, etc), you can uncompress the `computestacks.tar.gz` file and edit the `install.json`. The `install_plugin` command can be used on a directory, as well as, a compressed file, so no need to re-compress after you make your changes. 
+If you want to customize how the app is displayed in the cPanel interface (the name, icons, etc), you can decompress the `computestacks.tar.gz` file and edit the `install.json`. The `install_plugin` command can be used on a directory, as well as, a compressed file, so no need to re-compress after you make your changes.
